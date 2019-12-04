@@ -2,6 +2,7 @@
 ​
 > Pair programming with [Crystal Soo Lee](https://github.com/crystal-leesj)
 ​
+
 Number and name of feature: #1: Display images
 ​
 Estimate of time needed to complete: 1hr
