@@ -23,13 +23,13 @@ HornImage.prototype.renderHornObject = function() {
   $clone.find('p').text(this.description);
   $clone.find('img').attr('src', this.image_url);
   $clone.find('img').attr('alt', this.title);
-
   $clone.removeClass('clone');
+  // give class of keyword to filter out the images
   $clone.attr('class', this.keyword);
 }
 
 
-HornImage.prototype.selectByKeyword = function() {
+HornImage.prototype.renderKeywords = function() {
   let filterKeywords = [];
   // remove all elements except for first one
   $('option').not(':first').remove();
@@ -48,15 +48,16 @@ HornImage.prototype.selectByKeyword = function() {
 }
 
 function filterHornImg() {
-  $('select').on('change', function () {
+  $('select').on('change', function() {
     let selectedKeyword = $(this).val();
     if(selectedKeyword !== 'default') {
       $('section').hide();
       $(`section[class = "${selectedKeyword}"]`).show();
+    } else {
+      $('section').show();
     }
   });
 }
-
 
 function readJsonData() {
   $.get('./data/page-1.json', 'json')
@@ -68,10 +69,11 @@ function readJsonData() {
     .then(() => {
       allImages.forEach( image =>{
         image.renderHornObject();
-        image.selectByKeyword();
+        image.renderKeywords();
       })
     })
 }
+
 
 $(() => {
   readJsonData();
